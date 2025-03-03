@@ -19,6 +19,8 @@
 <h2>task1</h2>
 <h3>list</h3>
 <p>程式碼</p>
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 從  Brython 程式庫中的 browser 導入 html, 可用來輸出超文件內容
 # 而所導入的 document 可以指向網頁中的特定 id 內容
 from browser import html, document
@@ -52,7 +54,27 @@ brython_div1 &lt;= "6. " + html.A("41071204", href="https://mdecd2025.github.io/
 brython_div1 &lt;= html.BR()
 brython_div1 &lt;= "7. " + html.A("41071202", href="https://mdecd2025.github.io/hw-41071202/")+ html.A("(repo)", href="https://github.com/mdecd2025/hw-41071202")</pre>
 <p></p>
-<h2>task2</h2>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+}
+</script>
+<script type="text/python3">
+from browser import html
+from browser import document as doc
+ 
+# 利用 html 建立 canvas 超文件物件
+canvas = html.CANVAS(width=400, height=400)
+brython_div = doc["brython_div1"]
+brython_div <= canvas
+
+ctx = canvas.getContext("2d")
+ctx.lineWidth = 1
+ctx.strokeStyle = 'red'
+ctx.beginPath() 
+ctx.rect(0, 0, 200, 200)
+ctx.stroke()
+</script><h2>task2</h2>
 <h2>task3</h2>
 <h2>task4</h2>
 <h2>task5</h2>
