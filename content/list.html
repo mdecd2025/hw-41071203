@@ -185,21 +185,49 @@ brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
 }
 </script>
 <script type="text/python3">
-from browser import html
-from browser import document as doc
- 
-# 利用 html 建立 canvas 超文件物件
-canvas = html.CANVAS(width=400, height=400)
-brython_div = doc["brython_div1"]
-brython_div <= canvas
+from browser import document, html, ajax
 
-ctx = canvas.getContext("2d")
-ctx.lineWidth = 1
-ctx.strokeStyle = 'red'
-ctx.beginPath() 
-ctx.rect(0, 0, 200, 200)
-ctx.stroke()
-</script><br />task1 << <a href='task1.html'>Previous</a> <a href='task2.html'>Next</a> >> task2</div>
+url = "https://mde.tw/list/2b.txt"
+
+def on_complete(req):
+    if req.status == 200 or req.status == 0:
+        data = req.text
+        lines = data.strip().split('\n')
+        all_stud = lines[1:] 
+
+        brython_div1 = document["brython_div1"]
+        total_students = len(all_stud)
+        brython_div1 <= html.SPAN(f"總共有 {total_students} 名學員") + html.BR() + html.BR()
+
+        for idx, stud in enumerate(all_stud, start=1):
+            fields = stud.strip().split('\t')
+            stud_num = fields[0].strip() if len(fields) >= 1 else f"第 {idx} 位"
+            github_account = fields[1].strip() if len(fields) >= 2 else ''
+            website_url = f"https://mdecd2025.github.io/hw-{stud_num}"
+            website_link = html.A(f"{stud_num} 的網站", href=website_url, target="_blank")
+            if github_account:
+                repo_url = f"https://github.com/{github_account}"
+                repo_link = html.A(f"{stud_num} 的倉儲", href=repo_url, target="_blank")
+            else:
+                repo_link = html.SPAN("空")
+            brython_div1 <= html.SPAN(f"{idx}. ") + website_link + " | " + repo_link + html.BR()
+        brython_div1 <= html.BR() + html.HR() + html.BR()
+        brython_div1 <= html.SPAN("小組連結及組員連結:") + html.BR() + html.BR()
+
+        brython_div1 <= "1. " + html.A("2b-g8", href="https://mdecd2025.github.io/2b-g8/") + " " + html.A("(repo)", href="https://github.com/mdecd2025/2b-g8") + html.BR()
+        brython_div1 <= "2. " + html.A("41023215", href="https://mdecd2025.github.io/hw-41023215/") + " " + html.A("(repo)", href="https://github.com/mdecd2025/hw-41023215") + html.BR()
+        brython_div1 <= "3. " + html.A("41023216", href="https://mdecd2025.github.io/hw-41023216/") + " " + html.A("(repo)", href="https://github.com/mdecd2025/hw-41023216") + html.BR()
+        brython_div1 <= "4. " + html.A("41023213", href="https://mdecd2025.github.io/hw-41023213/") + " " + html.A("(repo)", href="https://github.com/mdecd2025/hw-41023213") + html.BR()
+        brython_div1 <= "5. " + html.A("41071203", href="https://mdecd2025.github.io/hw-41071203/") + " " + html.A("(repo)", href="https://github.com/mdecd2025/hw-41071203") + html.BR()
+        brython_div1 <= "6. " + html.A("41071204", href="https://mdecd2025.github.io/hw-41071204/") + " " + html.A("(repo)", href="https://github.com/mdecd2025/hw-41071204") + html.BR()
+        brython_div1 <= "7. " + html.A("41071202", href="https://mdecd2025.github.io/hw-41071202/") + " " + html.A("(repo)", href="https://github.com/mdecd2025/hw-41071202") + html.BR()
+
+    else:
+        print(f"error code：{req.status}")
+
+ajax.get(url, oncomplete=on_complete)
+</script>
+<div id="brython_div1"></div><br />task1 << <a href='task1.html'>Previous</a> <a href='task2.html'>Next</a> >> task2</div>
         
     <!-- footer -->
       <div class="container">
