@@ -17,7 +17,8 @@
 <h1>Tasks</h1>
 <div>
 <h2>task1</h2>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/6vyk42mrW40?si=n9cxZrL6yvCDGL_W" title="YouTube video player" width="560"></iframe></p><h3>list</h3>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/6vyk42mrW40?si=n9cxZrL6yvCDGL_W" title="YouTube video player" width="560"></iframe></p>
+<h3>list</h3>
 <p>程式碼</p>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
@@ -105,8 +106,146 @@ def on_complete(req):
 
 ajax.get(url, oncomplete=on_complete)
 </script>
-<div id="brython_div1"></div><h2>task2</h2>
-<h2>task3</h2>
+<div id="brython_div1"></div>
+<h2>task2</h2>
+<h3>w3</h3>
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+}
+</script>
+<script type="text/python3">
+from browser import document, html
+import urllib.request
+
+# 取得網頁中用來呈現輸出訊息的容器
+brython_div1 = document["brython_div1"]
+
+# 預期的 GitHub 帳號清單（現在這些是 GitHub 帳號，不再是學號）
+a_all_github = [
+    '41223154', '41271125', '41271158', '41271146', '41271131', 'CYG41223103',
+    '41223102', '41023128', '41023137', '41223137', '41223157', '41223156',
+    'otakuyoyo', '41223141', '41223113', 'kim41223114', 'joeisme1208',
+    '41223116', '41223144', '41223140', '41223143', '41223138', '41223134',
+    '41223136', 'zhe41223118', 'Spirit0224', 'yuhao-08', '41223158', 'Ren911308',
+    '41223150', 'Manto8', 'CYA41223106', 'yan21ed', 'Lin41223107', '41223133',
+    'hong41223129', '41223110', '41223147', 'Linjiahong41223125', 'CHN41223132',
+    'Yu-Fang-Hong', '41023111', 'yckaooooo', 'kolas911205', '41023105',
+    '40932134', '41223104', 'yan41223101', '41223105', '41223153', '41223120',
+    '41223152', 'G8People', 'WSE41223112', '41223146', '41223119'
+]
+
+b_all_github = [
+    '41223251', '41223211', '41223245', '41223243', 'jjjay41223212',
+    'leeshaowei0716', '41223234', '41223209', '41223205', '41223201',
+    '41223202', '41223208-hw', '41223216', '41223217', '41223248', 'emma0312',
+    '41223242', '41223203', '41223144', '41223235', 'RAY41223215',
+    'hyy41223228', '41223227', '41223206', '41223226-0', 'Cloud41223237',
+    'Yujenchuang', '41223225', 'ljg41223220', 'supowen', 'jacky93111',
+    '41223246', 'Liu41223244', '41223236', '41223219', '41271237',
+    '41223249', '41223229', '41223224', '41223222', '41223231', 'linryan23',
+    '41023114', '41223230', 'timluo123', 'CYC41223247', '41223218', 'ych0227',
+    '41023215', '41023216', '41023213', '41071203', '41071204', '41071202',
+    'c-ching', 'YUN4', 'tseYU000', 'snowfall-killer', 'junpig10'
+]
+
+
+def fetch_member_data(url):
+    """
+    從指定 URL 讀取資料並解析，回傳一個字典：
+    { 學號 : GitHub帳號 }
+    """
+    try:
+        with urllib.request.urlopen(url) as response:
+            content = response.read()
+    except Exception as e:
+        brython_div1 <= f"存取 {url} 時發生錯誤: {e}" + html.BR()
+        return {}
+
+    # 若 content 為 bytes 則進行解碼
+    if isinstance(content, bytes):
+        content = content.decode('utf-8')
+
+    lines = content.splitlines()
+    records = {}
+    # 假設第一行為標題，從第二行開始處理資料
+    for line in lines[1:]:
+        line = line.strip()
+        if not line:
+            continue
+        parts = line.split("\t")
+        student_num = parts[0].strip()
+        github = parts[1].strip() if len(parts) > 1 else ""
+        records[student_num] = github
+    return records
+
+
+def invert_mapping(data):
+    """
+    將 { 學號 : GitHub帳號 } 的 mapping 反轉為 { GitHub帳號 : 學號 }，
+    方便根據 GitHub 帳號查詢對應的學號。
+    """
+    inv = {}
+    for student_num, github in data.items():
+        if github:
+            inv[github] = student_num
+    return inv
+
+
+def list_missing_by_github(expected_github_list, member_data, group_name):
+    """
+    列出在預期的 expected_github_list 中，
+    但在從檔案取得的資料中找不到對應學號的 GitHub 帳號。
+    """
+    inv = invert_mapping(member_data)
+    brython_div1 <= f"=== {group_name} 缺少對應學號的 GitHub 帳號 ===" + html.BR()
+    missing = False
+    for gh in expected_github_list:
+        if gh not in inv:
+            brython_div1 <= f"{gh}" + html.BR()
+            missing = True
+    if not missing:
+        brython_div1 <= f"所有 {group_name} 的 GitHub 帳號均有對應學號！" + html.BR()
+
+
+def check_wrong_group_by_github(expected_github_list, member_data, group_name):
+    """
+    檢查資料中是否有 GitHub 帳號是屬於錯誤組別的：
+    即檔案中出現的 GitHub 帳號不在預期的 expected_github_list 中。
+    """
+    inv = invert_mapping(member_data)
+    brython_div1 <= f"=== {group_name} 資料中跑錯組的 GitHub 帳號 ===" + html.BR()
+    wrong = False
+    for gh in inv.keys():
+        if gh not in expected_github_list:
+            brython_div1 <= f"{gh} (對應學號: {inv[gh]})" + html.BR()
+            wrong = True
+    if not wrong:
+        brython_div1 <= f"{group_name} 資料中沒有跑錯組的 GitHub 帳號！" + html.BR()
+
+
+def main():
+    # 依據來源取得學號與 GitHub 帳號的對應資料
+    url_a = "https://mde.tw/list/2a.txt"
+    url_b = "https://mde.tw/list/2b.txt"
+    a_member_data = fetch_member_data(url_a)
+    b_member_data = fetch_member_data(url_b)
+
+    # 檢查 A 組：列出缺少對應學號的 GitHub 帳號及跑錯組的帳號
+    list_missing_by_github(a_all_github, a_member_data, "A 組")
+    check_wrong_group_by_github(a_all_github, a_member_data, "A 組")
+
+    # 檢查 B 組：列出缺少對應學號的 GitHub 帳號及跑錯組的帳號
+    list_missing_by_github(b_all_github, b_member_data, "B 組")
+    check_wrong_group_by_github(b_all_github, b_member_data, "B 組")
+
+
+# 執行主流程
+main()
+</script>
+<div id="brython_div1"></div><h2>task3</h2>
 <h2>task4</h2>
 <h2>task5</h2>
 <h2>task6</h2>
