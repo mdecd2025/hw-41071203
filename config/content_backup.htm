@@ -120,10 +120,10 @@ brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
 from browser import document, html
 import urllib.request
 
-# 取得網頁中用來呈現輸出訊息的容器
+# 取得網頁中用來呈現結果的容器
 brython_div1 = document["brython_div1"]
 
-# 預期的 GitHub 帳號清單（現在這些是 GitHub 帳號，不再是學號）
+# 預期的 GitHub 帳號清單（注意：這些現在都是 GitHub 帳號，不再是學號）
 a_all_github = [
     '41223154', '41271125', '41271158', '41271146', '41271131', 'CYG41223103',
     '41223102', '41023128', '41023137', '41223137', '41223157', '41223156',
@@ -164,13 +164,13 @@ def fetch_member_data(url):
         brython_div1 <= f"存取 {url} 時發生錯誤: {e}" + html.BR()
         return {}
 
-    # 若 content 為 bytes 則進行解碼
+    # 若 content 為 bytes 則需解碼
     if isinstance(content, bytes):
         content = content.decode('utf-8')
 
     lines = content.splitlines()
     records = {}
-    # 假設第一行為標題，從第二行開始處理資料
+    # 假設第一行是標題，從第二行開始處理
     for line in lines[1:]:
         line = line.strip()
         if not line:
@@ -196,8 +196,8 @@ def invert_mapping(data):
 
 def list_missing_by_github(expected_github_list, member_data, group_name):
     """
-    列出在預期的 expected_github_list 中，
-    但在從檔案取得的資料中找不到對應學號的 GitHub 帳號。
+    列出預期的 expected_github_list 中，
+    但在來源資料中找不到對應學號的 GitHub 帳號。
     """
     inv = invert_mapping(member_data)
     brython_div1 <= f"=== {group_name} 缺少對應學號的 GitHub 帳號 ===" + html.BR()
@@ -210,37 +210,42 @@ def list_missing_by_github(expected_github_list, member_data, group_name):
         brython_div1 <= f"所有 {group_name} 的 GitHub 帳號均有對應學號！" + html.BR()
 
 
-def check_wrong_group_by_github(expected_github_list, member_data, group_name):
+def check_wrong_group_by_github(expected_github_list, my_member_data, other_member_data, group_name):
     """
-    檢查資料中是否有 GitHub 帳號是屬於錯誤組別的：
-    即檔案中出現的 GitHub 帳號不在預期的 expected_github_list 中。
+    檢查來源資料中，對於屬於該組資料的文件 (如 2a.txt 或 2b.txt)：
+      - 對於那些出現在該文件中，但不屬於預期 expected_github_list 中的帳號，
+      - 若該帳號在另一組的來源資料中也有記錄，則視為該帳號屬於另一組，
+        不在此列為錯誤；除非另一組資料中也沒有該帳號，
+      - 否則將其列出，標示為「未出現在該組學員陣列中但 {資料組別}.txt 中有資料」。
     """
-    inv = invert_mapping(member_data)
-    brython_div1 <= f"=== {group_name} 資料中跑錯組的 GitHub 帳號 ===" + html.BR()
+    inv = invert_mapping(my_member_data)
+    other_inv = invert_mapping(other_member_data)
+    brython_div1 <= f"=== {group_name} 資料中未出現在該組學員陣列內的 GitHub 帳號 ===" + html.BR()
     wrong = False
-    for gh in inv.keys():
+    for gh in inv:
         if gh not in expected_github_list:
-            brython_div1 <= f"{gh} (對應學號: {inv[gh]})" + html.BR()
-            wrong = True
+            # 除非在另一組資料中讀到這個帳號，否則列出為錯組
+            if gh not in other_inv:
+                brython_div1 <= f"{gh} (對應學號: {inv[gh]})" + html.BR()
+                wrong = True
     if not wrong:
-        brython_div1 <= f"{group_name} 資料中沒有跑錯組的 GitHub 帳號！" + html.BR()
+        brython_div1 <= f"{group_name} 的資料中沒有發現未在預期學員陣列中的 GitHub 帳號！" + html.BR()
 
 
 def main():
-    # 依據來源取得學號與 GitHub 帳號的對應資料
+    # 分別讀取 A 組 (2a.txt) 與 B 組 (2b.txt) 的資料
     url_a = "https://mde.tw/list/2a.txt"
     url_b = "https://mde.tw/list/2b.txt"
     a_member_data = fetch_member_data(url_a)
     b_member_data = fetch_member_data(url_b)
 
-    # 檢查 A 組：列出缺少對應學號的 GitHub 帳號及跑錯組的帳號
+    # 檢查 A 組：缺少對應學號的及錯組（未在預期 A 組中且未出現在 B 組資料中）
     list_missing_by_github(a_all_github, a_member_data, "A 組")
-    check_wrong_group_by_github(a_all_github, a_member_data, "A 組")
+    check_wrong_group_by_github(a_all_github, a_member_data, b_member_data, "A 組")
 
-    # 檢查 B 組：列出缺少對應學號的 GitHub 帳號及跑錯組的帳號
+    # 檢查 B 組：以相同方式進行缺少對應學號及錯組檢查
     list_missing_by_github(b_all_github, b_member_data, "B 組")
-    check_wrong_group_by_github(b_all_github, b_member_data, "B 組")
-
+    check_wrong_group_by_github(b_all_github, b_member_data, a_member_data, "B 組")
 
 # 執行主流程
 main()
