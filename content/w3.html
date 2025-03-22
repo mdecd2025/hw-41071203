@@ -145,6 +145,7 @@ img.add_border {
     <div id="tipue_search_content">task2 << <a href='task2.html'>Previous</a> <a href='task3.html'>Next</a> >> task3<br /><h1>w3</h1>
 <script src="./../cmsimde/static/brython.js"></script>
 <script src="./../cmsimde/static/brython_stdlib.js"></script>
+<p><a href="https://mdecd2025.github.io/hw-41071203/content/Brython?src=https://gist.githubusercontent.com/41071203/450e084a3008cfbc17a7654571cadcd3/raw/177f6f470de0cafa6bf9ea9a3b957a5b075e98f5/CompareData.py">Brython版本</a></p>
 <script>
 window.onload=function(){
 brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
@@ -273,9 +274,6 @@ def main():
     a_member_data = fetch_member_data(url_a)
     b_member_data = fetch_member_data(url_b)
 
-    # 檢查 A 組：缺少對應學號的及錯組（未在預期 A 組中且未出現在 B 組資料中）
-    list_missing_by_github(a_all_github, a_member_data, "A 組")
-    check_wrong_group_by_github(a_all_github, a_member_data, b_member_data, "A 組")
 
     # 檢查 B 組：以相同方式進行缺少對應學號及錯組檢查
     list_missing_by_github(b_all_github, b_member_data, "B 組")
