@@ -111,6 +111,7 @@ ajax.get(url, oncomplete=on_complete)
 <p></p><h3>w3</h3>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
+<p><a href="https://mdecd2025.github.io/hw-41071203/content/Brython?src=https://gist.githubusercontent.com/41071203/450e084a3008cfbc17a7654571cadcd3/raw/177f6f470de0cafa6bf9ea9a3b957a5b075e98f5/CompareData.py">Brython版本</a></p>
 <script>
 window.onload=function(){
 brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
@@ -245,6 +246,12 @@ def main():
     check_wrong_group_by_github(b_all_github, b_member_data, a_member_data, "B 組")
 
 
+# 執行主流程
+main()
+
+# 取得目標 div
+div = document["brython_div1"]
+
 # 基本 IPv6 前綴
 base_ip = "2001:288:6004:17:fff1:cd25:0:b"
 port = "8000"
@@ -263,11 +270,8 @@ for i in range(1, 67):  # 1 到 66
     # 每個連結後加入換行
     div <= link
     div <= html.BR()
-
-# 執行主流程
-main()
 </script>
-<div id="brython_div1"><a href="https://mdecd2025.github.io/hw-41071203/content/Brython?src=https://gist.githubusercontent.com/41071203/450e084a3008cfbc17a7654571cadcd3/raw/177f6f470de0cafa6bf9ea9a3b957a5b075e98f5/CompareData.py">Brython版本</a></div><h2>task3</h2>
+<div id="brython_div1"></div><h2>task3</h2>
 <h2>task4</h2>
 <h2>task5</h2>
 <h2>task6</h2>
