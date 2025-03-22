@@ -108,7 +108,85 @@ ajax.get(url, oncomplete=on_complete)
 </script>
 <div id="brython_div1"></div>
 <h2>task2</h2>
-<p></p><h3>w3</h3>
+<h3>IPV6</h3>
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+}
+</script>
+<script type="text/python3">
+from browser import document, html, ajax
+from browser.timer import set_timeout
+
+# 目標 div
+div = document["brython_div1"]
+
+# IPv6 基礎位址
+base_ip = "2001:288:6004:17:fff1:cd25:0000:b"
+port = 8000
+
+# 學員學號列表
+student_numbers = [
+    40923137, 41023114, 41023205, 41023206, 41023210, 41023213, 41023215, 41023216,
+    41023218, 41023232, 41023237, 41071202, 41071203, 41071204, 41223201, 41223202,
+    41223203, 41223205, 41223206, 41223207, 41223208, 41223209, 41223210, 41223211,
+    41223212, 41223214, 41223215, 41223216, 41223217, 41223218, 41223219, 41223220,
+    41223221, 41223222, 41223223, 41223224, 41223225, 41223226, 41223227, 41223228,
+    41223229, 41223230, 41223231, 41223232, 41223233, 41223234, 41223235, 41223236,
+    41223237, 41223239, 41223240, 41223242, 41223243, 41223244, 41223245, 41223246,
+    41223247, 41223248, 41223249, 41223250, 41223251, 41223252, 41223253, 41271217,
+    41271236, 41271237
+]
+
+# 儲存無法連結的學員
+failed_students = []
+
+# 檢查成功與完成請求的計數器
+success_count = 0
+completed_requests = 0
+
+def check_url(student_id, url):
+    def on_complete(req):
+        global success_count, completed_requests
+        completed_requests += 1
+        if req.status == 200:
+            success_count += 1
+            div <= html.DIV(f"{student_id}: Pass")
+        else:
+            failed_students.append(student_id)
+            div <= html.DIV(f"{student_id}: Failed (Status: {req.status})")
+        # 當所有檢查完成時顯示結果
+        if completed_requests == len(student_numbers):
+            div <= html.HR()
+            if failed_students:
+                div <= html.DIV("無法連結的學員學號:")
+                for failed_id in failed_students:
+                    div <= html.DIV(failed_id)
+            else:
+                div <= html.DIV("所有學員網站均可連結")
+
+    # 發送 AJAX 請求
+    req = ajax.ajax()
+    req.bind('complete', on_complete)
+    req.open('GET', url, True)
+    req.send()
+
+# 生成並檢查每個學員的連結
+for i, student_id in enumerate(student_numbers, 1):
+    ip_suffix = f"{i:03d}"
+    full_ip = f"{base_ip}{ip_suffix}"
+    url = f"http://[{full_ip}]:{port}/content/About.html"
+    link = html.A(f"{student_id}", href=url, target="_blank")
+    div <= link
+    div <= html.BR()
+    # 使用顯式函式傳遞參數
+    def timeout_callback(s=student_id, u=url):
+        check_url(s, u)
+    set_timeout(timeout_callback, i * 100)
+</script>
+<div id="brython_div1"></div><h3>w3</h3>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
 <p><a href="https://mdecd2025.github.io/hw-41071203/content/Brython?src=https://gist.githubusercontent.com/41071203/450e084a3008cfbc17a7654571cadcd3/raw/177f6f470de0cafa6bf9ea9a3b957a5b075e98f5/CompareData.py">Brython版本</a></p>
@@ -272,7 +350,85 @@ for i in range(1, 67):  # 1 到 66
     div <= html.BR()
 </script>
 <div id="brython_div1"></div><h2>task3</h2>
-<h2>task4</h2>
+<h3>HW4</h3>
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+}
+</script>
+<script type="text/python3">
+from browser import document, html, ajax
+from browser.timer import set_timeout
+
+# 目標 div
+div = document["brython_div1"]
+
+# IPv6 基礎位址
+base_ip = "2001:288:6004:17:fff1:cd25:0000:b"
+port = 8000
+
+# 學員學號列表
+student_numbers = [
+    40923137, 41023114, 41023205, 41023206, 41023210, 41023213, 41023215, 41023216,
+    41023218, 41023232, 41023237, 41071202, 41071203, 41071204, 41223201, 41223202,
+    41223203, 41223205, 41223206, 41223207, 41223208, 41223209, 41223210, 41223211,
+    41223212, 41223214, 41223215, 41223216, 41223217, 41223218, 41223219, 41223220,
+    41223221, 41223222, 41223223, 41223224, 41223225, 41223226, 41223227, 41223228,
+    41223229, 41223230, 41223231, 41223232, 41223233, 41223234, 41223235, 41223236,
+    41223237, 41223239, 41223240, 41223242, 41223243, 41223244, 41223245, 41223246,
+    41223247, 41223248, 41223249, 41223250, 41223251, 41223252, 41223253, 41271217,
+    41271236, 41271237
+]
+
+# 儲存無法連結的學員
+failed_students = []
+
+# 檢查成功與完成請求的計數器
+success_count = 0
+completed_requests = 0
+
+def check_url(student_id, url):
+    def on_complete(req):
+        global success_count, completed_requests
+        completed_requests += 1
+        if req.status == 200:
+            success_count += 1
+            div <= html.DIV(f"{student_id}: Pass")
+        else:
+            failed_students.append(student_id)
+            div <= html.DIV(f"{student_id}: Failed (Status: {req.status})")
+        # 當所有檢查完成時顯示結果
+        if completed_requests == len(student_numbers):
+            div <= html.HR()
+            if failed_students:
+                div <= html.DIV("無法連結的學員學號:")
+                for failed_id in failed_students:
+                    div <= html.DIV(failed_id)
+            else:
+                div <= html.DIV("所有學員網站均可連結")
+
+    # 發送 AJAX 請求
+    req = ajax.ajax()
+    req.bind('complete', on_complete)
+    req.open('GET', url, True)
+    req.send()
+
+# 生成並檢查每個學員的連結
+for i, student_id in enumerate(student_numbers, 1):
+    ip_suffix = f"{i:03d}"
+    full_ip = f"{base_ip}{ip_suffix}"
+    url = f"http://[{full_ip}]:{port}/content/About.html"
+    link = html.A(f"{student_id}", href=url, target="_blank")
+    div <= link
+    div <= html.BR()
+    # 使用顯式函式傳遞參數
+    def timeout_callback(s=student_id, u=url):
+        check_url(s, u)
+    set_timeout(timeout_callback, i * 100)
+</script>
+<div id="brython_div1"></div><h2>task4</h2>
 <h2>task5</h2>
 <h2>task6</h2>
 <div class="line number1 index0 alt2"><code class="py comments"></code></div>
