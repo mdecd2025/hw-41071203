@@ -5,4 +5,7 @@ venv/
 config/config
 2.ppk
 2
-/Webots_2025a
+Webots_2025a/
+home_ipv6/
+Python313/
+Python310/
