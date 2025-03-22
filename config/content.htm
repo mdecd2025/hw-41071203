@@ -247,8 +247,31 @@ def main():
     list_missing_by_github(b_all_github, b_member_data, "B 組")
     check_wrong_group_by_github(b_all_github, b_member_data, a_member_data, "B 組")
 
+
 # 執行主流程
 main()
+
+# 取得目標 div
+div = document["brython_div1"]
+
+# 基本 IPv6 前綴
+base_ip = "2001:288:6004:17:fff1:cd25:0:b"
+port = "8000"
+
+# 產生 66 個連結 (從 b001 到 b066)
+for i in range(1, 67):  # 1 到 66
+    # 格式化學員編號為三位數 (001-066)
+    student_num = f"{i:03d}"
+    # 完整的 IPv6 位址
+    full_ip = f"{base_ip}{student_num}"
+    # 完整的 URL
+    url = f"http://[{full_ip}]:{port}"
+    
+    # 建立連結元素
+    link = html.A(f"學員 {student_num}", href=url, target="_blank")
+    # 每個連結後加入換行
+    div <= link
+    div <= html.BR()
 </script>
 <div id="brython_div1"></div><h2>task3</h2>
 <h2>task4</h2>

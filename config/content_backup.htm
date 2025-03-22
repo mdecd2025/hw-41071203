@@ -108,9 +108,7 @@ ajax.get(url, oncomplete=on_complete)
 </script>
 <div id="brython_div1"></div>
 <h2>task2</h2>
-<p>test</p>
-<p><span>test</span></p>
-<p><span>test</span></p><h3>w3</h3>
+<p></p><h3>w3</h3>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
 <script>
@@ -248,6 +246,26 @@ def main():
     # 檢查 B 組：以相同方式進行缺少對應學號及錯組檢查
     list_missing_by_github(b_all_github, b_member_data, "B 組")
     check_wrong_group_by_github(b_all_github, b_member_data, a_member_data, "B 組")
+
+
+# 基本 IPv6 前綴
+base_ip = "2001:288:6004:17:fff1:cd25:0:b"
+port = "8000"
+
+# 產生 66 個連結 (從 b001 到 b066)
+for i in range(1, 67):  # 1 到 66
+    # 格式化學員編號為三位數 (001-066)
+    student_num = f"{i:03d}"
+    # 完整的 IPv6 位址
+    full_ip = f"{base_ip}{student_num}"
+    # 完整的 URL
+    url = f"http://[{full_ip}]:{port}"
+    
+    # 建立連結元素
+    link = html.A(f"學員 {student_num}", href=url, target="_blank")
+    # 每個連結後加入換行
+    div <= link
+    div <= html.BR()
 
 # 執行主流程
 main()
