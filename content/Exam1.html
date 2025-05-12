@@ -146,7 +146,84 @@ img.add_border {
 <p>Exam1 (10%): 建立 Webots 基本物件模擬場景</p>
 <p>操作影片標題: 國立虎尾科技大學 - 機械設計工程系 - cd2025 Exam1 - 學員學號</p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/qYk3ka0irrs" title="國立虎尾科技大學 - 機械設計工程系 - cd2025 Exam1 - 41071203" width="560"></iframe></p>
-<p><a href="./../downloads/EX1.zip">EX1檔案</a></p><br />Exam << <a href='Exam.html'>Previous</a> <a href='Exam2.html'>Next</a> >> Exam2</div>
+<p></p>
+<p><strong>檔案: </strong><a href="./../downloads/EX1.zip">EX1檔案</a></p>
+<p></p>
+<p><strong>詳細步驟:</strong></p>
+<p>一、建立 Robot 與基座 (Base)</p>
+<ol data-end="313" data-start="153">
+<li class="" data-end="196" data-start="153">
+<p class="" data-end="196" data-start="156">在 <code data-end="165" data-start="158">Robot</code> 節點中建立一個 <code data-end="181" data-start="174">Solid</code>，作為基座 <code data-end="193" data-start="187">base</code>。</p>
+</li>
+<li class="" data-end="268" data-start="197">
+<p class="" data-end="268" data-start="200">在 <code data-end="208" data-start="202">base</code> 的 <code data-end="221" data-start="211">children</code> 中加入一個 <code data-end="235" data-start="228">Shape</code>，幾何為 <code data-end="245" data-start="240">Box</code>，大小為 <code data-end="265" data-start="250">1 x 0.1 x 0.1</code>。</p>
+</li>
+<li class="" data-end="313" data-start="269">
+<p class="" data-end="313" data-start="272">為 <code data-end="280" data-start="274">base</code> 加入 <code data-end="300" data-start="284">boundingObject</code> 與 <code data-end="312" data-start="303">physics</code>。</p>
+二、建立第一個旋轉關節 joint1 與 link1
+<ol data-end="703" data-start="355" start="4">
+<li class="" data-end="404" data-start="355">
+<p class="" data-end="404" data-start="358">在 <code data-end="367" data-start="360">Robot</code> 底下加入第一個 <code data-end="388" data-start="376">HingeJoint</code>，命名為 <code data-end="401" data-start="393">joint1</code>。</p>
+</li>
+<li class="" data-end="460" data-start="405">
+<p class="" data-end="460" data-start="408">在 <code data-end="418" data-start="410">joint1</code> 的 <code data-end="431" data-start="421">endPoint</code> 中加入一個 <code data-end="445" data-start="438">Solid</code>，命名為 <code data-end="457" data-start="450">link1</code>。</p>
+</li>
+<li class="" data-end="516" data-start="461">
+<p class="" data-end="516" data-start="464">在 <code data-end="473" data-start="466">link1</code> 中加入一個 <code data-end="487" data-start="480">Shape</code>，Box 尺寸為 <code data-end="513" data-start="496">0.4 x 0.1 x 0.1</code>。</p>
+</li>
+<li class="" data-end="590" data-start="517">
+<p class="" data-end="590" data-start="520">調整 <code data-end="530" data-start="523">link1</code> 的位置為 <code data-end="552" data-start="536">(-0.5, 0, 0.1)</code>，旋轉角度為 <code data-end="578" data-start="559">(0, 0, 1, 0.0524)</code>（學號尾碼為 03）</p>
+</li>
+<li class="" data-end="653" data-start="591">
+<p class="" data-end="653" data-start="594">設定 <code data-end="605" data-start="597">joint1</code> 的 <code data-end="626" data-start="608">axis = (0, 0, 1)</code>，<code data-end="650" data-start="627">anchor = (-0.5, 0, 0)</code>。</p>
+</li>
+<li class="" data-end="703" data-start="654">
+<p class="" data-end="703" data-start="657">在 <code data-end="667" data-start="659">joint1</code> 中加入 <code data-end="689" data-start="672">RotationalMotor</code>，名稱為 <code data-end="702" data-start="694">motor1</code>。</p>
+</li>
+</ol>
+ 三、在 link1 末端建立 joint2 與 link2
+<ol data-end="1105" data-start="748" start="10">
+<li class="" data-end="807" data-start="748">在 <code data-end="761" data-start="754">link1</code> 的 <code data-end="774" data-start="764">children</code> 中加入 <code data-end="791" data-start="779">HingeJoint</code>，命名為 <code data-end="804" data-start="796">joint2</code>。</li>
+<li class="" data-end="864" data-start="808">在 <code data-end="822" data-start="814">joint2</code> 的 <code data-end="835" data-start="825">endPoint</code> 中加入一個 <code data-end="849" data-start="842">Solid</code>，命名為 <code data-end="861" data-start="854">link2</code>。</li>
+<li class="" data-end="921" data-start="865">在 <code data-end="878" data-start="871">link2</code> 中加入一個 <code data-end="892" data-start="885">Shape</code>，Box 尺寸為 <code data-end="918" data-start="901">0.6 x 0.1 x 0.1</code>。</li>
+<li class="" data-end="983" data-start="922">在 <code data-end="935" data-start="928">link2</code> 裡再加一個 <code data-end="949" data-start="942">Shape</code>，Box 尺寸為 <code data-end="975" data-start="958">0.3 x 0.1 x 0.1</code>（附加結構）</li>
+<li class="" data-end="1044" data-start="984">調整 <code data-end="998" data-start="991">link2</code> 的位置為 <code data-end="1019" data-start="1004">(0.4, 0, 0.1)</code>，旋轉為 <code data-end="1041" data-start="1024">(0, 0, 1, 1.67)</code>。</li>
+<li class="" data-end="1105" data-start="1045">設定 <code data-end="1060" data-start="1052">joint2</code> 的 <code data-end="1081" data-start="1063">axis = (0, 0, 1)</code>，<code data-end="1104" data-start="1082">anchor = (0.4, 0, 0)</code>。</li>
+</ol>
+四、在 link2 末端建立 joint3 與 link3
+<ol data-end="1446" data-start="1150" start="16">
+<li class="" data-end="1209" data-start="1150">在 <code data-end="1163" data-start="1156">link2</code> 的 <code data-end="1176" data-start="1166">children</code> 中加入 <code data-end="1193" data-start="1181">HingeJoint</code>，命名為 <code data-end="1206" data-start="1198">joint3</code>。</li>
+<li class="" data-end="1266" data-start="1210">在 <code data-end="1224" data-start="1216">joint3</code> 的 <code data-end="1237" data-start="1227">endPoint</code> 中加入一個 <code data-end="1251" data-start="1244">Solid</code>，命名為 <code data-end="1263" data-start="1256">link3</code>。</li>
+<li class="" data-end="1323" data-start="1267">在 <code data-end="1280" data-start="1273">link3</code> 中加入一個 <code data-end="1294" data-start="1287">Shape</code>，Box 尺寸為 <code data-end="1320" data-start="1303">0.9 x 0.1 x 0.1</code>。</li>
+<li class="" data-end="1385" data-start="1324">調整 <code data-end="1338" data-start="1331">link3</code> 的位置為 <code data-end="1360" data-start="1344">(0.6, 0, -0.1)</code>，旋轉為 <code data-end="1382" data-start="1365">(0, 0, -1, 2.4)</code>。</li>
+<li class="" data-end="1446" data-start="1386">設定 <code data-end="1401" data-start="1393">joint3</code> 的 <code data-end="1422" data-start="1404">axis = (0, 0, 1)</code>，<code data-end="1445" data-start="1423">anchor = (0.6, 0, 0)</code>。</li>
+</ol>
+五、從 Robot 底下建立 joint4，連接 link3（SolidReference）
+<ol data-end="1689" data-start="1508" start="21">
+<li class="" data-end="1567" data-start="1508">
+<p class="" data-end="1567" data-start="1512">在 <code data-end="1521" data-start="1514">Robot</code> 的 <code data-end="1534" data-start="1524">children</code> 中建立 <code data-end="1551" data-start="1539">HingeJoint</code>，命名為 <code data-end="1564" data-start="1556">joint4</code>。</p>
+</li>
+<li class="" data-end="1630" data-start="1568">
+<p class="" data-end="1630" data-start="1572">在 <code data-end="1582" data-start="1574">joint4</code> 的 <code data-end="1595" data-start="1585">endPoint</code> 中加入 <code data-end="1616" data-start="1600">SolidReference</code>，參考 <code data-end="1627" data-start="1620">link3</code>。</p>
+</li>
+<li class="" data-end="1689" data-start="1631">
+<p class="" data-end="1689" data-start="1635">設定 <code data-end="1646" data-start="1638">joint4</code> 的 <code data-end="1667" data-start="1649">axis = (0, 0, 1)</code>，<code data-end="1688" data-start="1668">anchor = (1, 0, 0)</code>。</p>
+</li>
+</ol>
+六、加上碰撞與控制器
+<ol data-end="1872" data-start="1715" start="24">
+<li class="" data-end="1775" data-start="1715">
+<p class="" data-end="1775" data-start="1719">為 link1、link2、link3 各自加入 <code data-end="1760" data-start="1744">boundingObject</code> 與 <code data-end="1772" data-start="1763">physics</code>。</p>
+</li>
+<li class="" data-end="1830" data-start="1776">
+<p class="" data-end="1830" data-start="1780">使用 <code data-end="1799" data-start="1783">boundingObject</code> 的 <code data-end="1808" data-start="1802">Pose</code> 搭配 <code data-end="1817" data-start="1812">USE</code> 語法重用對應的形狀。</p>
+</li>
+<li class="" data-end="1872" data-start="1831">
+<p class="" data-end="1872" data-start="1835">在 <code data-end="1844" data-start="1837">Robot</code> 中加入 <code data-end="1861" data-start="1849">controller</code>，並指定控制程式名稱。</p>
+</li>
+</ol>
+</li>
+</ol><br />Exam << <a href='Exam.html'>Previous</a> <a href='Exam2.html'>Next</a> >> Exam2</div>
         
     <!-- footer -->
       <div class="container">
