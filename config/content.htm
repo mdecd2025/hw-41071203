@@ -478,7 +478,7 @@ for i in range(1, 67):  # 1 到 66
 <h2>Exam1</h2>
 <p>Exam1 (10%): 建立 Webots 基本物件模擬場景</p>
 <p>操作影片標題: 國立虎尾科技大學 - 機械設計工程系 - cd2025 Exam1 - 學員學號</p>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/qYk3ka0irrs" title="國立虎尾科技大學 - 機械設計工程系 - cd2025 Exam1 - 41071203" width="560"></iframe></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/m8At8rnjQjI?si=4bhWl2FSqwoXLDDi" title="YouTube video player" width="560"></iframe></p>
 <p></p>
 <p><strong>檔案: </strong><a href="/downloads/EX1.zip">EX1檔案</a></p>
 <p></p>
@@ -553,6 +553,7 @@ for i in range(1, 67):  # 1 到 66
 </li>
 <li class="" data-end="1872" data-start="1831">
 <p class="" data-end="1872" data-start="1835">在 <code data-end="1844" data-start="1837">Robot</code> 中加入 <code data-end="1861" data-start="1849">controller</code>，並指定控制程式名稱。</p>
+<p>心得:exam1和作業1很像，所以做起來沒有太大的困難，但程式有時候做到一半會閃退，所以要注意隨時存檔。</p>
 </li>
 </ol>
 </li>
@@ -564,7 +565,86 @@ for i in range(1, 67):  # 1 到 66
 <p></p>
 <p><strong>操作影片</strong></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/_b5IuWsax4w?si=UuM7XdJUg0BaSKz_" title="YouTube video player" width="560"></iframe></p>
-<p><strong></strong></p><h2>Exam3</h2>
+<p><strong></strong></p>
+<p><strong>步驟:</strong></p>
+<p class="" data-end="152" data-start="51">在 <strong data-end="67" data-start="53">Solvespace</strong> 中完成零件與機構設計後，將模型匯出為 STL 格式。接著，使用程式碼工具將 STL 檔轉換為 OBJ 格式，再匯入 <strong data-end="137" data-start="126">Blender</strong>，以檢查所有零件名稱是否正確。</p>
+<p class="" data-end="360" data-start="154">確認模型無誤後，開始在 <strong data-end="176" data-start="166">Webots</strong> 中建立機器人結構。首先，新增一個 <code data-end="201" data-start="194">Robot</code> 節點，並設定所需的 <code data-end="224" data-start="212">controller</code>（名稱為 <code data-end="249" data-start="229">fourbar_controller</code>）。接下來，在 <code data-end="267" data-start="257">children</code> 中加入兩個旋轉關節（<code data-end="290" data-start="278">HingeJoint</code>），分別命名為 <code data-end="306" data-start="298">joint1</code> 與 <code data-end="317" data-start="309">joint4</code>，以及兩個底座物件 <code data-end="334" data-start="327">Solid</code>（分別命名為 <code data-end="348" data-start="341">base1</code> 與 <code data-end="358" data-start="351">base2</code>）。</p>
+<hr class="" data-end="365" data-start="362"/>
+<p>base1 結構設定</p>
+<p class="" data-end="511" data-start="382">在 <code data-end="391" data-start="384">base1</code> 的 <code data-end="404" data-start="394">children</code> 中加入一個 <code data-end="418" data-start="411">Shape</code>，並指定 <code data-end="429" data-start="423">Mesh</code> 幾何體。</p>
+<hr class="" data-end="516" data-start="513"/>
+<p>base2 結構設定</p>
+<p class="" data-end="605" data-start="533">與 base1 類似，base2 也加入 <code data-end="561" data-start="554">Shape</code> 和 <code data-end="570" data-start="564">Mesh。</code></p>
+<hr class="" data-end="610" data-start="607"/>
+<p>建立連桿與關節</p>
+<ol data-end="1167" data-start="625">
+<li class="" data-end="849" data-start="625"><strong data-end="638" data-start="628">joint1</strong>
+<ul data-end="849" data-start="642">
+<li class="" data-end="692" data-start="642">
+<p class="" data-end="692" data-start="644">指定 <code data-end="654" data-start="647">Solid</code>，並在 <code data-end="668" data-start="658">children</code> 中加入 <code data-end="680" data-start="673">Shape</code> 與對應 <code data-end="691" data-start="685">Mesh</code>。</p>
+</li>
+<li class="" data-end="795" data-start="747">
+<p class="" data-end="795" data-start="749"><code data-end="771" data-start="749">HingeJointParameters</code> 中指定 <code data-end="782" data-start="776">axis</code> 為 <code data-end="794" data-start="785">(0 0 1)</code>。</p>
+</li>
+<li class="" data-end="849" data-start="799">
+<p class="" data-end="849" data-start="801">加入 <code data-end="812" data-start="804">device</code> 元件 <code data-end="833" data-start="816">RotationalMotor</code>，完成連桿 link1 的配置。</p>
+</li>
+</ul>
+</li>
+<li class="" data-end="997" data-start="851">
+<p class="" data-end="864" data-start="854"><strong data-end="864" data-start="854">joint2</strong></p>
+<ul data-end="997" data-start="868">
+<li class="" data-end="903" data-start="868">
+<p class="" data-end="903" data-start="870">同樣建立對應的 <code data-end="885" data-start="878">Solid</code> 與 <code data-end="895" data-start="888">Shape</code>、<code data-end="902" data-start="896">Mesh</code>。</p>
+</li>
+<li class="" data-end="997" data-start="931">
+<p class="" data-end="997" data-start="933"><code data-end="939" data-start="933">axis</code> 設為 <code data-end="952" data-start="943">(0 0 1)</code>，並設定 <code data-end="965" data-start="957">anchor</code> 為 <code data-end="987" data-start="968">(1.03 , 0.0539 , 0)</code>，完成 link2。</p>
+</li>
+</ul>
+</li>
+<li class="" data-end="1167" data-start="999">
+<p class="" data-end="1012" data-start="1002"><strong data-end="1012" data-start="1002">joint3</strong></p>
+<ul data-end="1167" data-start="1016">
+<li class="" data-end="1049" data-start="1016">
+<p class="" data-end="1049" data-start="1018">建立 <code data-end="1028" data-start="1021">Solid</code>，加入 <code data-end="1039" data-start="1032">Shape</code> 和 <code data-end="1048" data-start="1042">Mesh</code>。</p>
+</li>
+<li class="" data-end="1167" data-start="1077">
+<p class="" data-end="1167" data-start="1079"><code data-end="1101" data-start="1079">HingeJointParameters</code> 指定 <code data-end="1111" data-start="1105">axis</code> 為 <code data-end="1123" data-start="1114">(0 0 1)</code>，並設定 <code data-end="1136" data-start="1128">anchor</code> 為 <code data-end="1157" data-start="1139">(0.864 , 1.54 , 0)</code>，完成 link3。</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr class="" data-end="1172" data-start="1169"/>
+<p>物理與邊界設定</p>
+<p class="" data-end="1213" data-start="1186">每個連桿（link1、link2、link3）都加入：</p>
+<ul data-end="1285" data-start="1214">
+<li class="" data-end="1253" data-start="1214">
+<p class="" data-end="1253" data-start="1216"><code data-end="1232" data-start="1216">boundingObject</code>，使用對應的 <code data-end="1245" data-start="1239">mesh</code> 作為碰撞邊界。</p>
+</li>
+<li class="" data-end="1285" data-start="1254">
+<p class="" data-end="1285" data-start="1256">對應的 <code data-end="1269" data-start="1260">physics</code> 模組，加入質量與動力模擬設定。</p>
+</li>
+</ul>
+<hr class="" data-end="1290" data-start="1287"/>
+<p>joint4 設定</p>
+<ul data-end="1436" data-start="1306">
+<li class="" data-end="1364" data-start="1306">
+<p class="" data-end="1364" data-start="1308">建立 <code data-end="1323" data-start="1311">HingeJoint</code>（joint4），並使用 <code data-end="1352" data-start="1336">SolidReference</code> 指向 <code data-end="1363" data-start="1356">link3</code>。</p>
+</li>
+<li class="" data-end="1436" data-start="1365">
+<p class="" data-end="1436" data-start="1367">設定 <code data-end="1392" data-start="1370">HingeJointParameters</code> 的 <code data-end="1401" data-start="1395">axis</code> 為 <code data-end="1413" data-start="1404">(0 0 1)</code>，<code data-end="1422" data-start="1414">anchor</code> 設為 <code data-end="1435" data-start="1426">(2 0 0)</code>。</p>
+</li>
+</ul>
+<hr class="" data-end="1441" data-start="1438"/>
+<p>控制器設定</p>
+<ul data-end="1502" data-start="1453">
+<li class="" data-end="1502" data-start="1453">
+<p class="" data-end="1502" data-start="1455">指定使用的控制器為 <code data-end="1485" data-start="1465">fourbar_controller</code>，負責整體四連桿機構的控制與運作。</p>
+<p></p>
+<p></p>
+<p>心得:考試2不像考試1一樣需要在webots裡繪製零件，而是要在Solvespace繪製完零件在轉檔匯入webots內，因此操作上相對簡單很多，只需要調整一下參數即可，</p>
+</li>
+</ul><h2>Exam3</h2>
 <p>Exam3 (20%): Webots 機電模擬場景的協同設計</p>
 <p>操作影片標題: 國立虎尾科技大學 - 機械設計工程系 - cd2025 Exam3 - 學員學號</p>
 <p></p>
@@ -572,7 +652,8 @@ for i in range(1, 67):  # 1 到 66
 <p><strong><iframe allowfullscreen="allowfullscreen" height="314" src='//www.youtube.com/embed/DkAv1fRHwxs?si=G1q3qu-xlD_uNdxV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;' width="560"></iframe></strong></p>
 <p><strong></strong></p>
 <p><strong>Exam3-2</strong></p>
-<p><strong><iframe allowfullscreen="allowfullscreen" height="314" src='//www.youtube.com/embed/nufCifoTWTU?si=M4hwbr8kT2ZLWqWb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;' width="560"></iframe></strong></p><h1>Final</h1>
+<p><strong><iframe allowfullscreen="allowfullscreen" height="314" src='//www.youtube.com/embed/nufCifoTWTU?si=M4hwbr8kT2ZLWqWb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;' width="560"></iframe></strong></p>
+<h1>Final</h1>
 <p><span>期末協同專案執行過程影片、簡報與 PDf 報告檔案 (六人一組) (30%)</span></p>
 <p><span>題目: <span style="background-color: #ccffcc;">Webots 動態投籃模擬系統的協同設計</span></span></p>
 <p><span>說明: </span></p>
