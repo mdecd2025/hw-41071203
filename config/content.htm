@@ -483,7 +483,7 @@ for i in range(1, 67):  # 1 到 66
 <p><strong><span style="color: #0000ff;">檔案:</span> </strong><a href="/downloads/EX1.zip">EX1檔案</a></p>
 <p></p>
 <p><span style="color: #0000ff;"><strong>詳細步驟:</strong></span></p>
-<p>一、建立 Robot 與基座 (Base)</p>
+<p><strong>一、建立 Robot 與基座 (Base)</strong></p>
 <ol data-end="313" data-start="153">
 <li class="" data-end="196" data-start="153">
 <p class="" data-end="196" data-start="156">在 <code data-end="165" data-start="158">Robot</code> 節點中建立一個 <code data-end="181" data-start="174">Solid</code>，作為基座 <code data-end="193" data-start="187">base</code>。</p>
@@ -493,7 +493,9 @@ for i in range(1, 67):  # 1 到 66
 </li>
 <li class="" data-end="313" data-start="269">
 <p class="" data-end="313" data-start="272">為 <code data-end="280" data-start="274">base</code> 加入 <code data-end="300" data-start="284">boundingObject</code> 與 <code data-end="312" data-start="303">physics</code>。</p>
-二、建立第一個旋轉關節 joint1 與 link1
+</li>
+</ol>
+<p><strong>二、建立第一個旋轉關節 joint1 與 link1</strong></p>
 <ol data-end="703" data-start="355" start="4">
 <li class="" data-end="404" data-start="355">
 <p class="" data-end="404" data-start="358">在 <code data-end="367" data-start="360">Robot</code> 底下加入第一個 <code data-end="388" data-start="376">HingeJoint</code>，命名為 <code data-end="401" data-start="393">joint1</code>。</p>
@@ -514,7 +516,7 @@ for i in range(1, 67):  # 1 到 66
 <p class="" data-end="703" data-start="657">在 <code data-end="667" data-start="659">joint1</code> 中加入 <code data-end="689" data-start="672">RotationalMotor</code>，名稱為 <code data-end="702" data-start="694">motor1</code>。</p>
 </li>
 </ol>
- 三、在 link1 末端建立 joint2 與 link2
+<p><strong>三、在 link1 末端建立 joint2 與 link2</strong></p>
 <ol data-end="1105" data-start="748" start="10">
 <li class="" data-end="807" data-start="748">在 <code data-end="761" data-start="754">link1</code> 的 <code data-end="774" data-start="764">children</code> 中加入 <code data-end="791" data-start="779">HingeJoint</code>，命名為 <code data-end="804" data-start="796">joint2</code>。</li>
 <li class="" data-end="864" data-start="808">在 <code data-end="822" data-start="814">joint2</code> 的 <code data-end="835" data-start="825">endPoint</code> 中加入一個 <code data-end="849" data-start="842">Solid</code>，命名為 <code data-end="861" data-start="854">link2</code>。</li>
@@ -523,7 +525,7 @@ for i in range(1, 67):  # 1 到 66
 <li class="" data-end="1044" data-start="984">調整 <code data-end="998" data-start="991">link2</code> 的位置為 <code data-end="1019" data-start="1004">(0.4, 0, 0.1)</code>，旋轉為 <code data-end="1041" data-start="1024">(0, 0, 1, 1.67)</code>。</li>
 <li class="" data-end="1105" data-start="1045">設定 <code data-end="1060" data-start="1052">joint2</code> 的 <code data-end="1081" data-start="1063">axis = (0, 0, 1)</code>，<code data-end="1104" data-start="1082">anchor = (0.4, 0, 0)</code>。</li>
 </ol>
-四、在 link2 末端建立 joint3 與 link3
+<p><strong>四、在 link2 末端建立 joint3 與 link3</strong></p>
 <ol data-end="1446" data-start="1150" start="16">
 <li class="" data-end="1209" data-start="1150">在 <code data-end="1163" data-start="1156">link2</code> 的 <code data-end="1176" data-start="1166">children</code> 中加入 <code data-end="1193" data-start="1181">HingeJoint</code>，命名為 <code data-end="1206" data-start="1198">joint3</code>。</li>
 <li class="" data-end="1266" data-start="1210">在 <code data-end="1224" data-start="1216">joint3</code> 的 <code data-end="1237" data-start="1227">endPoint</code> 中加入一個 <code data-end="1251" data-start="1244">Solid</code>，命名為 <code data-end="1263" data-start="1256">link3</code>。</li>
@@ -531,7 +533,7 @@ for i in range(1, 67):  # 1 到 66
 <li class="" data-end="1385" data-start="1324">調整 <code data-end="1338" data-start="1331">link3</code> 的位置為 <code data-end="1360" data-start="1344">(0.6, 0, -0.1)</code>，旋轉為 <code data-end="1382" data-start="1365">(0, 0, -1, 2.4)</code>。</li>
 <li class="" data-end="1446" data-start="1386">設定 <code data-end="1401" data-start="1393">joint3</code> 的 <code data-end="1422" data-start="1404">axis = (0, 0, 1)</code>，<code data-end="1445" data-start="1423">anchor = (0.6, 0, 0)</code>。</li>
 </ol>
-五、從 Robot 底下建立 joint4，連接 link3（SolidReference）
+<p><strong>五、從 Robot 底下建立 joint4，連接 link3（SolidReference）</strong></p>
 <ol data-end="1689" data-start="1508" start="21">
 <li class="" data-end="1567" data-start="1508">
 <p class="" data-end="1567" data-start="1512">在 <code data-end="1521" data-start="1514">Robot</code> 的 <code data-end="1534" data-start="1524">children</code> 中建立 <code data-end="1551" data-start="1539">HingeJoint</code>，命名為 <code data-end="1564" data-start="1556">joint4</code>。</p>
@@ -543,7 +545,7 @@ for i in range(1, 67):  # 1 到 66
 <p class="" data-end="1689" data-start="1635">設定 <code data-end="1646" data-start="1638">joint4</code> 的 <code data-end="1667" data-start="1649">axis = (0, 0, 1)</code>，<code data-end="1688" data-start="1668">anchor = (1, 0, 0)</code>。</p>
 </li>
 </ol>
-六、加上碰撞與控制器
+<p><strong>六、加上碰撞與控制器</strong></p>
 <ol data-end="1872" data-start="1715" start="24">
 <li class="" data-end="1775" data-start="1715">
 <p class="" data-end="1775" data-start="1719">為 link1、link2、link3 各自加入 <code data-end="1760" data-start="1744">boundingObject</code> 與 <code data-end="1772" data-start="1763">physics</code>。</p>
@@ -553,11 +555,10 @@ for i in range(1, 67):  # 1 到 66
 </li>
 <li class="" data-end="1872" data-start="1831">
 <p class="" data-end="1872" data-start="1835">在 <code data-end="1844" data-start="1837">Robot</code> 中加入 <code data-end="1861" data-start="1849">controller</code>，並指定控制程式名稱。</p>
-<p>心得:exam1和作業1很像，所以做起來沒有太大的困難，但程式有時候做到一半會閃退，所以要注意隨時存檔。</p>
 </li>
 </ol>
-</li>
-</ol><h2>Exam2</h2>
+<p><span style="color: #0000ff;"><strong>心得:</strong></span></p>
+<p>exam1和作業1很像，所以做起來沒有太大的困難，但程式有時候做到一半會閃退，所以要注意隨時存檔。</p><h2>Exam2</h2>
 <p>Exam2 (10%): 利用 CAD 零組件建立模擬場景</p>
 <p>操作影片標題: 國立虎尾科技大學 - 機械設計工程系 - cd2025 Exam2 - 學員學號</p>
 <p></p>
@@ -640,24 +641,80 @@ for i in range(1, 67):  # 1 到 66
 <hr class="" data-end="1441" data-start="1438"/>
 <p>控制器設定</p>
 <ul data-end="1502" data-start="1453">
+<ul data-end="1502" data-start="1453">
+<ul data-end="1502" data-start="1453">
 <li class="" data-end="1502" data-start="1453">
 <p class="" data-end="1502" data-start="1455">指定使用的控制器為 <code data-end="1485" data-start="1465">fourbar_controller</code>，負責整體四連桿機構的控制與運作。</p>
-<p></p>
-<p></p>
-<p>心得:考試2不像考試1一樣需要在webots裡繪製零件，而是要在Solvespace繪製完零件在轉檔匯入webots內，因此操作上相對簡單很多，只需要調整一下參數即可，</p>
 </li>
-</ul><h2>Exam3</h2>
+</ul>
+</ul>
+</ul>
+<p><strong><span style="color: #0000ff;"></span></strong></p>
+<p><strong><span style="color: #0000ff;">心得:</span></strong></p>
+<p><strong><span style="color: #0000ff;"></span></strong>考試2不像考試1一樣需要在webots裡繪製零件，而是要在Solvespace繪製完零件在轉檔匯入webots內，因此操作上相對簡單很多，只需要調整一下參數即可，</p><h2>Exam3</h2>
 <p>Exam3 (20%): Webots 機電模擬場景的協同設計</p>
 <p>操作影片標題: 國立虎尾科技大學 - 機械設計工程系 - cd2025 Exam3 - 學員學號</p>
 <p></p>
-<p><span style="color: #0000ff;"><strong>Exam3-1</strong></span></p>
+<p><span style="color: #0000ff; background-color: #ffcc99;"><strong>Exam3-1</strong></span></p>
 <p><strong><iframe allowfullscreen="allowfullscreen" height="314" src='//www.youtube.com/embed/DkAv1fRHwxs?si=G1q3qu-xlD_uNdxV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;' width="560"></iframe></strong></p>
+<p><span style="color: #0000ff;"><strong>操作步驟:</strong></span></p>
+<ol>
+<li>在控制台設定老師分發的<span>IPv6</span>網址</li>
+<li><span>關閉IPv4</span>網址</li>
+<li>以<span> webotsw --stream </span>啟動個人所完成的<span> HW1 </span>模擬系統</li>
+<li>查看各自<span>webots</span>的端口</li>
+<li>在網頁上輸入<span>http:[</span>自己的<span>IPv6</span>網址<span>]:</span>查看當下自己<span>webots</span>的端口<span>/index.html</span></li>
+<li>在<span>Connect to</span>內輸入<span>[</span>自己的<span>IPv6</span>網址<span>]: <span>查看當下自己</span></span><span>webots</span>的端口</li>
+<li>按下<span>Connect</span>即可看到自己<span>webots</span>的畫面</li>
+<li>按下<span>Disconnec</span></li>
+<li>到<span>Connect to</span>內輸入<span>[</span>組員的<span>IPv6</span>網址<span>]: </span>組員<span>webots</span>的端口(組員同時也需連線至各自的IPv6)，並依序查看各組員的檔案</li>
+</ol>
+<p></p>
+<p><strong><span style="color: #0000ff;">心得:</span></strong></p>
+<p><span style="color: #000000;">剛開始不太理解要怎麼跟組員做協同，也不知道該如何連到自己的網站，摸索了很久才終於連上自己的網站，之後就協助組員連上各自的IPv6，第一次連上的感覺很不可思議，也體驗到協同作業的特別之處。</span></p>
 <p><strong></strong></p>
-<p><span style="color: #0000ff;"><strong>Exam3-2</strong></span></p>
+<p><span style="color: #0000ff; background-color: #ffcc99;"><strong>Exam3-2</strong></span></p>
 <p><strong><iframe allowfullscreen="allowfullscreen" height="314" src='//www.youtube.com/embed/nufCifoTWTU?si=M4hwbr8kT2ZLWqWb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;' width="560"></iframe></strong></p>
+<p><span style="color: #0000ff;"><strong>操作步驟:</strong></span></p>
+<ol>
+<li>在控制台設定老師分發的<span>IPv6</span>網址</li>
+<li><span>關閉IPv4</span>網址</li>
+<li>下載老師的檔案</li>
+<li>以<span> webotsw --stream </span>開啟</li>
+<li>查看各自<span>webots</span>的端口</li>
+<li>在程式碼處修改成各自的學號</li>
+<li>在網頁上輸入<span>http:[</span>自己的<span>IPv6</span>網址<span>]:</span>查看當下自己<span>webots</span>的端口<span>/index.html</span></li>
+<li>在<span>Connect to</span>內輸入<span>[</span>自己的<span>IPv6</span>網址<span>]:<span> </span><span>查看當下自己</span></span><span>webots</span>的端口</li>
+<li>按下<span>Connect</span>即可看到自己<span>webots</span>的畫面</li>
+<li>按下<span>Disconnec</span></li>
+<li>到<span>Connect to</span>內輸入<span>[</span>組員的<span>IPv6</span>網址<span>]: </span>組員<span>webots</span>的端口(組員同時也需連線至各自的IPv6)，並依序查看各組員的檔案</li>
+</ol>
+<p><strong><span style="color: #0000ff;"></span></strong></p>
+<p><strong><span style="color: #0000ff;">心得:</span></strong></p>
+<p><span style="color: #000000;">跟上一個內容差不多，只是要將程式碼的數字改成自己的學號末3碼，如果會操作上一個考試內容的話，這個題目也能成順利完成。</span></p>
+<p></p>
 <p><strong></strong></p>
-<p><span style="color: #0000ff;"><strong>Exam3-3</strong></span></p>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/m7HNrprcxq8?si=ky4N4dpSgAe7nyAG" title="YouTube video player" width="560"></iframe></p><h1>Final</h1>
+<p><span style="color: #0000ff; background-color: #ffcc99;"><strong>Exam3-3</strong></span></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/m7HNrprcxq8?si=ky4N4dpSgAe7nyAG" title="YouTube video player" width="560"></iframe></p>
+<p><span style="color: #0000ff;"><strong>操作步驟:</strong></span></p>
+<ol>
+<li>在控制台設定老師分發的<span>IPv6</span>網址</li>
+<li><span>關閉IPv4</span>網址</li>
+<li>輸入<span>pip</span>確認安裝正確的<span>python版本</span></li>
+<li><span>輸入指令"<span style="background-color: #ccffff;">set WEBOTS_HOME=y:\Webots_2025a</span>"</span></li>
+<li><span>輸入指令"<span style="background-color: #ccffff;">webots –stream</span>"</span></li>
+<li>執行指令"<span><span style="background-color: #ccffff;">pip install websocket-client websocket-server keyboard</span>"</span></li>
+<li>執行"<span style="background-color: #ccffff;">python youbot_cart_client.py"</span></li>
+<li>查看各自<span>webots</span>的端口</li>
+<li>在程式碼處修改成各自的學號</li>
+<li>在網頁上輸入<span>http:[</span>自己的<span>IPv6</span>網址<span>]:</span>查看當下自己<span>webots</span>的端口<span>/index.html</span></li>
+<li>在<span>Connect to</span>內輸入<span>[</span>組長的<span>IPv6</span>網址<span>]:<span> </span></span>組長<span>webots</span>的端口</li>
+<li>按下<span>Connect</span>即可看到組長<span>webots</span>的畫面</li>
+<li>按下上下左右建即可操控</li>
+</ol>
+<p><strong><span style="color: #0000ff;"></span></strong></p>
+<p><strong><span style="color: #0000ff;">心得:</span></strong></p>
+<p>這個題目相較於其他2題難度提高了不少，我們也是摸索很久，也求助於有相關經驗的學長才成功將這題做出來，不過這題的自由度相較於其他兩題來的高，如果成功用出來的話，成就感與可玩性也增加了不少。</p><h1>Final</h1>
 <p><span>期末協同專案執行過程影片、簡報與 PDf 報告檔案 (六人一組) (30%)</span></p>
 <p><span>題目: <span style="background-color: #ccffcc;">Webots 動態投籃模擬系統的協同設計</span></span></p>
 <p><span>說明: </span></p>

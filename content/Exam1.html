@@ -150,7 +150,7 @@ img.add_border {
 <p><strong><span style="color: #0000ff;">檔案:</span> </strong><a href="./../downloads/EX1.zip">EX1檔案</a></p>
 <p></p>
 <p><span style="color: #0000ff;"><strong>詳細步驟:</strong></span></p>
-<p>一、建立 Robot 與基座 (Base)</p>
+<p><strong>一、建立 Robot 與基座 (Base)</strong></p>
 <ol data-end="313" data-start="153">
 <li class="" data-end="196" data-start="153">
 <p class="" data-end="196" data-start="156">在 <code data-end="165" data-start="158">Robot</code> 節點中建立一個 <code data-end="181" data-start="174">Solid</code>，作為基座 <code data-end="193" data-start="187">base</code>。</p>
@@ -160,7 +160,9 @@ img.add_border {
 </li>
 <li class="" data-end="313" data-start="269">
 <p class="" data-end="313" data-start="272">為 <code data-end="280" data-start="274">base</code> 加入 <code data-end="300" data-start="284">boundingObject</code> 與 <code data-end="312" data-start="303">physics</code>。</p>
-二、建立第一個旋轉關節 joint1 與 link1
+</li>
+</ol>
+<p><strong>二、建立第一個旋轉關節 joint1 與 link1</strong></p>
 <ol data-end="703" data-start="355" start="4">
 <li class="" data-end="404" data-start="355">
 <p class="" data-end="404" data-start="358">在 <code data-end="367" data-start="360">Robot</code> 底下加入第一個 <code data-end="388" data-start="376">HingeJoint</code>，命名為 <code data-end="401" data-start="393">joint1</code>。</p>
@@ -181,7 +183,7 @@ img.add_border {
 <p class="" data-end="703" data-start="657">在 <code data-end="667" data-start="659">joint1</code> 中加入 <code data-end="689" data-start="672">RotationalMotor</code>，名稱為 <code data-end="702" data-start="694">motor1</code>。</p>
 </li>
 </ol>
- 三、在 link1 末端建立 joint2 與 link2
+<p><strong>三、在 link1 末端建立 joint2 與 link2</strong></p>
 <ol data-end="1105" data-start="748" start="10">
 <li class="" data-end="807" data-start="748">在 <code data-end="761" data-start="754">link1</code> 的 <code data-end="774" data-start="764">children</code> 中加入 <code data-end="791" data-start="779">HingeJoint</code>，命名為 <code data-end="804" data-start="796">joint2</code>。</li>
 <li class="" data-end="864" data-start="808">在 <code data-end="822" data-start="814">joint2</code> 的 <code data-end="835" data-start="825">endPoint</code> 中加入一個 <code data-end="849" data-start="842">Solid</code>，命名為 <code data-end="861" data-start="854">link2</code>。</li>
@@ -190,7 +192,7 @@ img.add_border {
 <li class="" data-end="1044" data-start="984">調整 <code data-end="998" data-start="991">link2</code> 的位置為 <code data-end="1019" data-start="1004">(0.4, 0, 0.1)</code>，旋轉為 <code data-end="1041" data-start="1024">(0, 0, 1, 1.67)</code>。</li>
 <li class="" data-end="1105" data-start="1045">設定 <code data-end="1060" data-start="1052">joint2</code> 的 <code data-end="1081" data-start="1063">axis = (0, 0, 1)</code>，<code data-end="1104" data-start="1082">anchor = (0.4, 0, 0)</code>。</li>
 </ol>
-四、在 link2 末端建立 joint3 與 link3
+<p><strong>四、在 link2 末端建立 joint3 與 link3</strong></p>
 <ol data-end="1446" data-start="1150" start="16">
 <li class="" data-end="1209" data-start="1150">在 <code data-end="1163" data-start="1156">link2</code> 的 <code data-end="1176" data-start="1166">children</code> 中加入 <code data-end="1193" data-start="1181">HingeJoint</code>，命名為 <code data-end="1206" data-start="1198">joint3</code>。</li>
 <li class="" data-end="1266" data-start="1210">在 <code data-end="1224" data-start="1216">joint3</code> 的 <code data-end="1237" data-start="1227">endPoint</code> 中加入一個 <code data-end="1251" data-start="1244">Solid</code>，命名為 <code data-end="1263" data-start="1256">link3</code>。</li>
@@ -198,7 +200,7 @@ img.add_border {
 <li class="" data-end="1385" data-start="1324">調整 <code data-end="1338" data-start="1331">link3</code> 的位置為 <code data-end="1360" data-start="1344">(0.6, 0, -0.1)</code>，旋轉為 <code data-end="1382" data-start="1365">(0, 0, -1, 2.4)</code>。</li>
 <li class="" data-end="1446" data-start="1386">設定 <code data-end="1401" data-start="1393">joint3</code> 的 <code data-end="1422" data-start="1404">axis = (0, 0, 1)</code>，<code data-end="1445" data-start="1423">anchor = (0.6, 0, 0)</code>。</li>
 </ol>
-五、從 Robot 底下建立 joint4，連接 link3（SolidReference）
+<p><strong>五、從 Robot 底下建立 joint4，連接 link3（SolidReference）</strong></p>
 <ol data-end="1689" data-start="1508" start="21">
 <li class="" data-end="1567" data-start="1508">
 <p class="" data-end="1567" data-start="1512">在 <code data-end="1521" data-start="1514">Robot</code> 的 <code data-end="1534" data-start="1524">children</code> 中建立 <code data-end="1551" data-start="1539">HingeJoint</code>，命名為 <code data-end="1564" data-start="1556">joint4</code>。</p>
@@ -210,7 +212,7 @@ img.add_border {
 <p class="" data-end="1689" data-start="1635">設定 <code data-end="1646" data-start="1638">joint4</code> 的 <code data-end="1667" data-start="1649">axis = (0, 0, 1)</code>，<code data-end="1688" data-start="1668">anchor = (1, 0, 0)</code>。</p>
 </li>
 </ol>
-六、加上碰撞與控制器
+<p><strong>六、加上碰撞與控制器</strong></p>
 <ol data-end="1872" data-start="1715" start="24">
 <li class="" data-end="1775" data-start="1715">
 <p class="" data-end="1775" data-start="1719">為 link1、link2、link3 各自加入 <code data-end="1760" data-start="1744">boundingObject</code> 與 <code data-end="1772" data-start="1763">physics</code>。</p>
@@ -220,11 +222,10 @@ img.add_border {
 </li>
 <li class="" data-end="1872" data-start="1831">
 <p class="" data-end="1872" data-start="1835">在 <code data-end="1844" data-start="1837">Robot</code> 中加入 <code data-end="1861" data-start="1849">controller</code>，並指定控制程式名稱。</p>
-<p>心得:exam1和作業1很像，所以做起來沒有太大的困難，但程式有時候做到一半會閃退，所以要注意隨時存檔。</p>
 </li>
 </ol>
-</li>
-</ol><br />Exam << <a href='Exam.html'>Previous</a> <a href='Exam2.html'>Next</a> >> Exam2</div>
+<p><span style="color: #0000ff;"><strong>心得:</strong></span></p>
+<p>exam1和作業1很像，所以做起來沒有太大的困難，但程式有時候做到一半會閃退，所以要注意隨時存檔。</p><br />Exam << <a href='Exam.html'>Previous</a> <a href='Exam2.html'>Next</a> >> Exam2</div>
         
     <!-- footer -->
       <div class="container">
