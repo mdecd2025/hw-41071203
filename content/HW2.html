@@ -147,7 +147,99 @@ img.add_border {
 <p>操作影片標題: 國立虎尾科技大學 - 機械設計工程系 - cd2025 HW2 - 學員學號</p>
 <p></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/0sYOsMbdgO0" title="國立虎尾科技大學   機械設計工程系   cd2025 HW2   41071203" width="560"></iframe></p>
-<p><a href="./../downloads/HW2.zip" title="HW2連桿">HW2連桿.zip</a></p><br />HW1 << <a href='HW1.html'>Previous</a> <a href='HW3.html'>Next</a> >> HW3</div>
+<p><span style="color: #000080;"><strong>檔案: </strong></span><a href="./../downloads/HW2.zip" title="HW2連桿">HW2連桿.zip</a></p>
+<p><span style="color: #000080;"><strong>步驟:</strong></span></p>
+<p><span style="color: #008000;"><strong>一.使用 SolveSpace 建構零件與組裝圖</strong></span></p>
+<p style="padding-left: 30px;"><br/>1.在 SolveSpace 中設計各零件與機構結構。</p>
+<p style="padding-left: 30px;">2. 匯出 STL 格式<br/>完成後將所有零件輸出為 .stl 格式檔案。</p>
+<p style="padding-left: 30px;">3. 使用程式碼轉換 STL 為 OBJ 格式<br/>透過程式腳本（如使用 assimp, meshio, 或 Python 的 trimesh）將 .stl 轉為 .obj，便於後續操作與 Blender 匯入。</p>
+<p style="padding-left: 30px;">4. 匯入 Blender 確認零件命名<br/>將 .obj 檔匯入 Blender。</p>
+<p style="padding-left: 30px;"><strong>確認所有零件名稱無誤，以利對應到 Webots。</strong></p>
+<p><span style="color: #008000;"><strong>二. Webots 機器人模型建構</strong></span></p>
+<p><br/><strong>1.新增 robot 元件，並加入以下結構：</strong></p>
+<p style="padding-left: 30px;"><span style="background-color: #99ccff;">a. Base 結構</span></p>
+<ul>
+<li>在 robot.children 中建立兩個 Solid 節點：</li>
+</ul>
+<p style="padding-left: 30px;"><span style="background-color: #99ccff;">b. base1</span></p>
+<ul>
+<li>children 包含：
+<ul>
+<li>Shape：</li>
+<li>geometry：Mesh</li>
+<li>appearance → Material { diffuseColor 0.8 0.8 1 }</li>
+</ul>
+</li>
+</ul>
+<p style="padding-left: 30px;"><span style="background-color: #99ccff;">c. base2</span><br/>結構同上，顏色相同，完成第二底座結構。</p>
+<p style="padding-left: 30px;"><span style="background-color: #99ccff;">d. Link1</span></p>
+<ul>
+<li>新增 HingeJoint → 名為 joint1</li>
+<li>子節點 Solid，內含：
+<ul>
+<li>Shape → 使用 Mesh</li>
+<li>Appearance → Material { diffuseColor 1 0 0 }</li>
+</ul>
+</li>
+<li>加入：
+<ul>
+<li>HingeJointParameters { axis 0 0 1 }</li>
+<li>RotationalMotor → 控制裝置完成</li>
+</ul>
+</li>
+</ul>
+<p style="padding-left: 30px;"><span style="background-color: #99ccff;">e. Link2</span></p>
+<ul>
+<li>joint1 下建立 HingeJoint → 名為 joint2</li>
+<li>Solid 內容：
+<ul>
+<li>Shape → Mesh</li>
+<li>Appearance → Material { diffuseColor 0 1 0 }</li>
+<li>HingeJointParameters：</li>
+<li>axis 0 0 1</li>
+<li>anchor -0.162 0.3656 0</li>
+</ul>
+</li>
+</ul>
+<p style="padding-left: 30px;"><span style="background-color: #99ccff;">f. Link3</span></p>
+<ul>
+<li>接續於 joint2 下加入 HingeJoint → joint3</li>
+<li>內部 Solid：
+<ul>
+<li>Shape → Mesh</li>
+<li>Appearance → Material { diffuseColor 0 0 1 }</li>
+<li>HingeJointParameters：</li>
+<li>axis 0 0 1</li>
+<li>anchor 0.3702 0.6429 0</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.碰撞與物理屬性設定</strong></p>
+<ul>
+<li>為每個 Link 設定 boundingObject 與 physics：
+<ul>
+<li>link1 → boundingObject { mesh } + physics</li>
+<li>link2 → boundingObject { mesh } + physics</li>
+<li>link3 → boundingObject { mesh } + physics</li>
+</ul>
+</li>
+</ul>
+<p><strong>3.Joint4 與連結</strong></p>
+<ul>
+<li>在 robot.children 中加入 HingeJoint → joint4</li>
+<li>SolidReference { solidName "link3" }</li>
+<li>HingeJointParameters：
+<ul>
+<li>axis 0 0 1</li>
+<li>anchor 1 0 0</li>
+</ul>
+</li>
+</ul>
+<p><strong>4.控制器設定</strong></p>
+<ul>
+<li>設定 controller 為 .empty4</li>
+</ul>
+<p><strong><span style="color: #0000ff;">心得:</span></strong>跟作業一要做的東西差不多，也因為練習多了所以做的比較順了，但還是有那麼一點不熟練，還需要多加練習。</p><br />HW1 << <a href='HW1.html'>Previous</a> <a href='HW3.html'>Next</a> >> HW3</div>
         
     <!-- footer -->
       <div class="container">
