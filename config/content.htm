@@ -430,8 +430,98 @@ for i in range(1, 67):  # 1 到 66
 <p>HW1 (5%): <span style="background-color: #ffff00;">建立由 Box 組成的平面四連桿機構 Webots 模擬場景</span></p>
 <p>操作影片標題: 國立虎尾科技大學 - 機械設計工程系 - cd2025 HW1 - 學員學號</p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/i23RGZ47aVU" title="國立虎尾科技大學   機械設計工程系   cd2025 HW1   41071203" width="560"></iframe></p>
-<p><a href="/downloads/worlds.zip">四連桿機構原始檔</a></p>
-<h2>HW2</h2>
+<p><span style="color: #000080;"><strong>檔案:</strong></span> <a href="/downloads/worlds.zip">四連桿機構原始檔</a></p>
+<p><span style="color: #000080;"><strong>步驟:</strong></span></p>
+<p><strong>一、基座 (Base)</strong><br/>1.在 robot.children 下新增一個 Solid 節點命名為 base。</p>
+<p>2.base.children 中加入：</p>
+<ul style="list-style-type: circle;">
+<li>Shape 節點，其中包含：</li>
+<li>geometry 使用 Box { size 1 0.1 0.1 }</li>
+</ul>
+<p><strong> base 是整體機器人的底座。</strong></p>
+<p></p>
+<p><strong>二、連桿一 (Link1)</strong></p>
+<p>1.在 robot.children 下加入 HingeJoint，命名為 joint1。</p>
+<p>2.joint1 下包含一個 Solid，其內結構如下：</p>
+<ul>
+<li>translation: -0.5 0 0</li>
+<li>rotation: 0 0 1 1.5708</li>
+</ul>
+<p>3.children 包含：</p>
+<ul>
+<li>Pose (位置為 0.2 0 0.1) 內含：</li>
+<li>Shape → Box { size 0.4 0.1 0.1 }</li>
+<li>Appearance → Material { diffuseColor 1 0 0 }</li>
+</ul>
+<p>4.joint1 的其他設定：</p>
+<ul>
+<li>HingeJointParameters：
+<ul>
+<li>axis: 0 0 1</li>
+<li>anchor: -0.5 0 0</li>
+</ul>
+</li>
+</ul>
+<p>5.加入一個 RotationalMotor 作為控制器裝置。</p>
+<p></p>
+<p><strong>三、連桿二 (Link2)</strong><br/>1.在 joint1 下加入第二個 HingeJoint，命名為 joint2。</p>
+<p>2.joint2 的 Solid 結構：</p>
+<ul>
+<li>translation: 0.4 0 0.1</li>
+<li>rotation: 0 0 -1 1.047195307179586</li>
+</ul>
+<p>3.children 包含：</p>
+<ul>
+<li>Pose (0.3 0 0.1) 包含：
+<ul style="list-style-type: circle;">
+<li>Shape → Box { size 0.6 0.1 0.1 }</li>
+<li>Appearance → Material { diffuseColor 0 1 0 }</li>
+</ul>
+</li>
+</ul>
+<p>4.joint2 的參數：</p>
+<ul>
+<li>HingeJointParameters：
+<ul>
+<li>axis: 0 0 1</li>
+<li>anchor: 0.4 0 0</li>
+</ul>
+</li>
+</ul>
+<p></p>
+<p><strong>四、連桿三 (Link3)</strong><br/>1.在 joint2 下建立 HingeJoint，命名為 joint3。</p>
+<p>2.joint3 內部 Solid：</p>
+<ul>
+<li>translation: 0.6 0 0</li>
+<li>rotation: 0 0 -1 1.5</li>
+</ul>
+<p>3.children 中的 Pose (0.42 0 0) 含有：</p>
+<ul>
+<li>Shape → Box { size 0.9 0.1 0.1 }</li>
+<li>Appearance → Material { diffuseColor 0 0 1 }</li>
+</ul>
+<p>4.HingeJointParameters：</p>
+<ul>
+<li>axis: 0 0 1</li>
+<li>anchor: 0.6 0 0</li>
+</ul>
+<p></p>
+<p><strong>五、Bounding Object 與物理屬性設定</strong><br/>1.為三個連桿加入對應的 boundingObject 與 physics：</p>
+<p>2.Link1: Pose { translation 0.2 0 0.1 } → boundingObject → physics</p>
+<p>3.Link2: Pose { translation 0.3 0 0.1 } → boundingObject → physics</p>
+<p>4.Link3: Pose { translation 0.4 0 0 } → boundingObject → physics</p>
+<p><strong></strong></p>
+<p><strong>六、連結到最末端連桿 (Link3)</strong><br/>1.在 robot.children 下加入 HingeJoint 命名為 joint4</p>
+<p>2.joint4 的子節點為 SolidReference { solidName "link3" }</p>
+<p>3.設定 HingeJointParameters：</p>
+<ul>
+<li>axis: 0 0 1</li>
+<li>anchor: 0.5 0 0</li>
+</ul>
+<p></p>
+<p><strong>七、控制器</strong><br/>在 robot 中加入控制器，指向 .empty4</p>
+<p><span style="color: #000080;"><strong>心得:</strong></span></p>
+<p>一開始不太熟練Webots，因為之前都沒碰過這個程式，所以一直練習，還不斷問老師與同學，才成功把作業做出來，做出來那一刻很有成就感。</p><h2>HW2</h2>
 <p>HW2 (5%): <span style="background-color: #ffff00;">建立由 CAD 繪製零件組成的平面四連桿機構 Webots 模擬場景</span></p>
 <p>操作影片標題: 國立虎尾科技大學 - 機械設計工程系 - cd2025 HW2 - 學員學號</p>
 <p></p>
